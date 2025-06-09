@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Search, Home, Token, Wallet } from 'lucide-react';
+import { Search, Home, Coins, Wallet } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -45,7 +44,9 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <ConnectButton />
+        <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+          Wallet Connected
+        </Button>
       </header>
 
       <div className="flex">
@@ -56,7 +57,7 @@ const Dashboard = () => {
               <Home className="w-6 h-6" />
             </Button>
             <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-              <Token className="w-6 h-6" />
+              <Coins className="w-6 h-6" />
             </Button>
             <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
               <Wallet className="w-6 h-6" />

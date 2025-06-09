@@ -1,19 +1,17 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useAccount } from 'wagmi';
 
 const Index = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [username, setUsername] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
   const navigate = useNavigate();
-  const { isConnected } = useAccount();
 
   const handleGetStarted = () => {
     setShowWelcome(true);
@@ -27,6 +25,10 @@ const Index = () => {
   const handleCreateAccount = () => {
     setShowWelcome(false);
     setShowCreate(true);
+  };
+
+  const handleConnectWallet = () => {
+    setIsConnected(true);
   };
 
   const handleLoginSubmit = () => {
@@ -50,7 +52,16 @@ const Index = () => {
           <a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a>
           <a href="#" className="text-gray-300 hover:text-white transition-colors">About</a>
           <a href="#" className="text-gray-300 hover:text-white transition-colors">Community</a>
-          <ConnectButton />
+          <Button 
+            onClick={handleConnectWallet}
+            className={`px-4 py-2 rounded-lg font-semibold ${
+              isConnected 
+                ? 'bg-green-600 hover:bg-green-700 text-white' 
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
+            }`}
+          >
+            {isConnected ? 'Wallet Connected' : 'Connect Wallet'}
+          </Button>
         </nav>
       </header>
 
@@ -138,9 +149,16 @@ const Index = () => {
               onChange={(e) => setUsername(e.target.value)}
               className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
             />
-            <div className="flex justify-center">
-              <ConnectButton />
-            </div>
+            <Button 
+              onClick={handleConnectWallet}
+              className={`py-3 rounded-lg font-semibold ${
+                isConnected 
+                  ? 'bg-green-600 hover:bg-green-700 text-white' 
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {isConnected ? 'Wallet Connected' : 'Connect Wallet'}
+            </Button>
             <Button 
               onClick={handleLoginSubmit}
               className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold"
@@ -165,9 +183,16 @@ const Index = () => {
               onChange={(e) => setUsername(e.target.value)}
               className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
             />
-            <div className="flex justify-center">
-              <ConnectButton />
-            </div>
+            <Button 
+              onClick={handleConnectWallet}
+              className={`py-3 rounded-lg font-semibold ${
+                isConnected 
+                  ? 'bg-green-600 hover:bg-green-700 text-white' 
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {isConnected ? 'Wallet Connected' : 'Connect Wallet'}
+            </Button>
             <Button 
               onClick={handleCreateSubmit}
               className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold"
