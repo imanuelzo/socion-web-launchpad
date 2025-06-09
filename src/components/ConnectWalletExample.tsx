@@ -1,7 +1,10 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 
 const ConnectWalletExample = () => {
+  const { address, isConnected } = useAccount();
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold mb-8 text-center">
@@ -11,6 +14,12 @@ const ConnectWalletExample = () => {
       </h1>
 
       <ConnectButton />
+
+      {isConnected && (
+        <div className="mt-6 p-4 bg-gray-800 rounded-lg">
+          <p className="text-green-400">Connected to: {address}</p>
+        </div>
+      )}
 
       <p className="mt-8 text-gray-400 text-center max-w-md">
         This is an example implementation of RainbowKit with Taranium chain support.
