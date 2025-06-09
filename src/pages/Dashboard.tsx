@@ -1,12 +1,20 @@
-
 import { useState } from 'react';
-import { Search, Home, Coins, Wallet } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Home, Coins, Wallet, LogOut } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear any stored user data and redirect to landing page
+    localStorage.removeItem('userConnected');
+    localStorage.removeItem('username');
+    navigate('/');
+  };
 
   const trendingTokens = [
     { name: 'TOL', price: '$1.25', change: '+5.2%' },
@@ -44,9 +52,19 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
-          Wallet Connected
-        </Button>
+        <div className="flex items-center space-x-3">
+          <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+            Wallet Connected
+          </Button>
+          <Button 
+            onClick={handleLogout}
+            variant="outline"
+            className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </Button>
+        </div>
       </header>
 
       <div className="flex">
